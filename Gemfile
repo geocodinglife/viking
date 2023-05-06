@@ -17,10 +17,10 @@ gem "bootsnap", require: false
 gem "rack-cors"
 
 group :development, :test do
+  gem 'rspec-rails', '~> 6.0.0'
   gem "debug", platforms: %i[ mri mingw x64_mingw ]
 end
 
 group :development do
   gem "standard"
 end
-
