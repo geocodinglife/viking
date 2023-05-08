@@ -1,5 +1,7 @@
 class User < ApplicationRecord
   devise :database_authenticatable, :registerable
+  
+  include Roleable
 
   validates :email, presence: true
   validates :password, presence: true

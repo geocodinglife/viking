@@ -3,10 +3,11 @@ class ApplicationController < ActionController::API
   respond_to :json
   before_action :process_token
 
-  private
+  protected
 
   def process_token
     if request.headers['Authorization'].present?
+
       begin
         jwt_payload = JWT.decode(request.headers['Authorization'].split(' ')[1], Rails.application.secrets.secret_key_base).first
         @current_user_id = jwt_payload['id']
@@ -17,15 +18,11 @@ class ApplicationController < ActionController::API
   end
 
   def authenticate_user!(options = {})
-    head :unauthorized unless signed_in?
-  end
-
-  def signed_in?
-    @current_user_id.present?
+    head :unauthorized unless user_signed_in?
   end
 
   def current_user
-    @current_user ||= super || User.find(@current_user_id)
+    @current_user ||= super || User.find(params["user"][:id])
   end
 
   
@@ -33,7 +30,6 @@ class ApplicationController < ActionController::API
   protected
 
   def configure_permitted_parameters
-    devise_parameter_sanitizer.permit(:sign_up, keys: [:email, :password])
-    devise_parameter_sanitizer.permit(:account_update, keys: [:email, :password])
+    devise_parameter_sanitizer.permit(:sign_up, keys: [:email, :password, :password_confirmation, :id, *User::ROLES])
   end
 end

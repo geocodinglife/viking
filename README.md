@@ -25,7 +25,8 @@ Functional requirements:
 * 16 c. Obtain a list of purchases according to parameters. The parameters must be:
 * 17 purchase date (from and to), category id, customer id, Administrator Id (purchases of products associated with a certain Administrator Id).
 
-* 18 d. Obtain the number of purchases according to granularity. The same parameters as the previous point must be considered + the granularity parameter, which can be: hour, day, week, year. It should be considered that this information will be used by a Frontend for a graph. Examples:
+* 18 d. Obtain the number of purchases according to granularity. The same parameters as the previous point must be considered + the granularity parameter, which can be: hour, day, week, year. 
+     It should be considered that this information will be used by a Frontend for a graph. Examples:
 
 * 19 i. If it's per hour, the expected API response is: {2023-05-01 00:00: 10, 2023-05-01 01:00: 40, ...}.
         If it's per day: {2023-05-01: 100, 2023-05-02: 250, ...}
